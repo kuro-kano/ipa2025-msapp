@@ -10,15 +10,16 @@
         <h1>You are calling me from {{ request.remote_addr }}</h1>
         <form method="POST" action="/add">
             <input name="ip" placeholder="Your IP" required />
-            <textarea name="username" placeholder="Your Username" rows="4" required></textarea>
+            <input name="username" placeholder="Your Username" required/>
+            <input name="password" placeholder="Your password" required />
             <button type="submit">Add Comment</button>
         </form>
 
         <ul>
-            {% for comment in data %}
+            {% for router in routers %}
             <li>
                 <span class="comment-text">
-                    <strong>{{ comment.ip }}</strong>: {{ comment.username }}
+                    <strong>{{ router.ip }}</strong>: {{ router.username }}
                 </span>
                 <form method="POST" action="{{ url_for('delete_router', idx=loop.index0) }}" style="display:inline">
                     <button type="submit">Delete</button>

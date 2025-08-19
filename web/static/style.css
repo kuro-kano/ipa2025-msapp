@@ -51,7 +51,7 @@ form:hover {
     transform: translateY(-2px);
 }
 
-input[name="yourname"] {
+input[name="ip"] {
     width: 100%;
     padding: 15px;
     border: 2px solid #e9ecef;
@@ -60,15 +60,17 @@ input[name="yourname"] {
     margin-bottom: 15px;
     transition: all 0.3s ease;
     font-family: inherit;
+    background: rgba(255, 255, 255, 0.8);
 }
 
-input[name="yourname"]:focus {
+input[name="ip"]:focus {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: white;
 }
 
-textarea[name="message"] {
+input[name="username"] {
     width: 100%;
     padding: 15px;
     border: 2px solid #e9ecef;
@@ -76,15 +78,38 @@ textarea[name="message"] {
     font-size: 16px;
     margin-bottom: 20px;
     resize: vertical;
-    min-height: 120px;
+    min-height: 80px;
     transition: all 0.3s ease;
     font-family: inherit;
+    background: rgba(255, 255, 255, 0.8);
 }
 
-textarea[name="message"]:focus {
+input[name="password"]:focus {
     outline: none;
     border-color: #667eea;
     box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: white;
+}
+
+input[name="password"] {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e9ecef;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    resize: vertical;
+    min-height: 80px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+input[name="username"]:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    background: white;
 }
 
 button[type="submit"] {
@@ -142,8 +167,13 @@ li:hover {
 .comment-text strong {
     color: #667eea;
     font-weight: 600;
-    display: block;
-    margin-bottom: 5px;
+    display: inline;
+    margin-right: 8px;
+    font-family: 'Courier New', monospace;
+    background: rgba(102, 126, 234, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
 }
 
 /* Delete button styles */
