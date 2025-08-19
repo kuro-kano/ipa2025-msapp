@@ -1,5 +1,5 @@
 """file app.py to run web server"""
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, url_for
 
 app = Flask(__name__)
 
@@ -20,6 +20,18 @@ def add_comment():
         data.append({"yourname": yourname, "message": message})
     return redirect("/")
 
+@app.route("/delete/<idx>", methods=["POST"])
+def delete_comment(idx):
+    """delete function to delete specific comment"""
+    idx = int(idx)
+
+    try:
+        if 0 <= idx < len(data):
+            data.pop(idx)
+    except Exception:
+        pass
+
+    return redirect(url_for("main"))
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, threaded=False)

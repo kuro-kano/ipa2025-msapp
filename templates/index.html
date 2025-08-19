@@ -17,6 +17,9 @@
         {% for comment in data %}
         <li>
             {{ comment.yourname }} - {{ comment.message }}
+            <form method="POST" action="{{ url_for('delete_comment', idx=loop.index0) }}" style="display:inline">
+                <button type="submit">Delete</button>
+            </form>
         </li>
         {% endfor %}
     </ul>
