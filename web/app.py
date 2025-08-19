@@ -12,9 +12,7 @@ routers = db["routers"]
 @app.route("/")
 def main():
     """main function what render index.html"""
-    data = []
-    for x in routers.find():
-        data.append(x)
+    data = list(routers.find())
     return render_template("index.html", routers=data)
 
 @app.route("/add", methods=["POST"])
