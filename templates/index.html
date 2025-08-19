@@ -12,6 +12,15 @@
         <input name="message" placeholder="Message" required />
         <button type="submit">Add Comment</button>
     </form>
+
+    <ul>
+        {% for comment in data %}
+        <li>
+            {{ comment.yourname }} - {{ comment.message }}
+        </li>
+        {% endfor %}
+    </ul>
+
 </body>
 
 </html>
