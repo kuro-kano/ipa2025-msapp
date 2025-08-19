@@ -21,7 +21,7 @@
                 <span class="comment-text">
                     <strong>{{ router.ip }}</strong>: {{ router.username }}
                 </span>
-                <form method="POST" action="{{ url_for('delete_router', idx=loop.index0) }}" style="display:inline">
+                <form method="POST" action="{{ url_for('delete_router', idx=router._id) }}" style="display:inline">
                     <button type="submit">Delete</button>
                 </form>
             </li>

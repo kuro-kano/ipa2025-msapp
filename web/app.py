@@ -1,5 +1,5 @@
 """file app.py to run web server"""
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect
 from pymongo import MongoClient
 from bson import ObjectId
 
@@ -8,11 +8,11 @@ client = MongoClient("mongodb://mongo:27017/")
 db = client['ipa2025_db']
 routers = db["routers"]
 
-data = []
 
 @app.route("/")
 def main():
     """main function what render index.html"""
+    data = []
     for x in routers.find():
         data.append(x)
     return render_template("index.html", routers=data)
@@ -37,14 +37,9 @@ def add_router():
 @app.route("/delete/<idx>", methods=["POST"])
 def delete_router(idx):
     """delete function to delete specific router"""
-    idx = int(idx)
+    routers.delete_one({ "_id": ObjectId(idx) })
 
-    try:
-        routers.delete_one({ "_id": ObjectId(idx) })
-    except Exception:
-        pass
-
-    return redirect(url_for("main"))
+    return redirect("/")
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, threaded=False)
