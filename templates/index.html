@@ -9,8 +9,8 @@
     <div class="container">
         <h1>You are calling me from {{ request.remote_addr }}</h1>
         <form method="POST" action="/add">
-            <input name="yourname" placeholder="Your Name" required />
-            <textarea name="message" placeholder="Message" rows="4" required></textarea>
+            <input name="ip" placeholder="Your IP" required />
+            <textarea name="username" placeholder="Your Username" rows="4" required></textarea>
             <button type="submit">Add Comment</button>
         </form>
 
@@ -18,9 +18,9 @@
             {% for comment in data %}
             <li>
                 <span class="comment-text">
-                    <strong>{{ comment.yourname }}</strong>: {{ comment.message }}
+                    <strong>{{ comment.ip }}</strong>: {{ comment.username }}
                 </span>
-                <form method="POST" action="{{ url_for('delete_comment', idx=loop.index0) }}" style="display:inline">
+                <form method="POST" action="{{ url_for('delete_router', idx=loop.index0) }}" style="display:inline">
                     <button type="submit">Delete</button>
                 </form>
             </li>

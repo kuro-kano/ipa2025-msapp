@@ -11,18 +11,18 @@ def main():
     return render_template("index.html", data=data)
 
 @app.route("/add", methods=["POST"])
-def add_comment():
-    """add comment to data[]"""
-    yourname = request.form.get("yourname")
-    message = request.form.get("message")
+def add_router():
+    """add router to data[]"""
+    ip = request.form.get("ip")
+    username = request.form.get("username")
 
-    if yourname and message:
-        data.append({"yourname": yourname, "message": message})
+    if ip and username:
+        data.append({"ip": ip, "username": username})
     return redirect("/")
 
 @app.route("/delete/<idx>", methods=["POST"])
-def delete_comment(idx):
-    """delete function to delete specific comment"""
+def delete_router(idx):
+    """delete function to delete specific router"""
     idx = int(idx)
 
     try:
