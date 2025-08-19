@@ -1,5 +1,5 @@
 FROM python
-RUN pip install --no-cache-dir --progress-bar=off flask
+RUN pip install --no-cache-dir --progress-bar=off flask pymongo
 
 COPY ./static /home/myapp/static/
 COPY ./templates /home/myapp/templates/
