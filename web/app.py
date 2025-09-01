@@ -1,13 +1,14 @@
 """file app.py to run web server"""
+from os import environ as env
+
 from flask import Flask, request, render_template, redirect
 from pymongo import MongoClient
 from bson import ObjectId
 
 app = Flask(__name__)
-client = MongoClient("mongodb://mongo:27017/")
-db = client['ipa2025_db']
+client = MongoClient(env.get("MONGO_URI"))
+db = client[env.get("DB_NAME")]
 routers = db["routers"]
-
 
 @app.route("/")
 def main():
