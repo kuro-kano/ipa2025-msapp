@@ -1,7 +1,9 @@
 """Client to connect to routers and fetch interface information."""
 from netmiko import ConnectHandler
-import ntc_templates, os, json
+import ntc_templates
+import os
 from database import save_interface_status
+
 
 def get_interfaces(ip, username, password):
     """Connects to a router and retrieves interface information."""

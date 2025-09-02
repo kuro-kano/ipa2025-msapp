@@ -5,11 +5,13 @@ from flask import Flask, request, render_template, redirect
 from pymongo import MongoClient
 from bson import ObjectId
 
+
 app = Flask(__name__)
 client = MongoClient(env.get("MONGO_URI"))
 db = client[env.get("DB_NAME")]
 routers = db["routers"]
 interface_status = db["interface_status"]
+
 
 @app.route("/")
 def main():
@@ -17,11 +19,19 @@ def main():
     data = list(routers.find())
     return render_template("index.html", routers=data)
 
+
 @app.route("/router/<ip>", methods=["GET"])
 def router_detail(ip):
     """view router interfaces status"""
-    data = db.interface_status.find({"router_ip": ip}).sort("timestamp", -1).limit(3)
-    return render_template("router.html", router_ip=ip, interface_data=data)
+    data = (db.interface_status.find({"router_ip": ip})
+            .sort("timestamp", -1)
+            .limit(3))
+    return render_template(
+        "router.html",
+        router_ip=ip,
+        interface_data=data
+    )
+
 
 @app.route("/add", methods=["POST"])
 def add_router():
@@ -31,21 +41,20 @@ def add_router():
     password = request.form.get("password")
 
     if ip and username and password:
-        routers.insert_one(
-            {
-                "ip": ip,
-                "username": username,
-                "password": password
-            }
-        )
+        routers.insert_one({
+            "ip": ip,
+            "username": username,
+            "password": password
+        })
     return redirect("/")
+
 
 @app.route("/delete/<idx>", methods=["POST"])
 def delete_router(idx):
     """delete function to delete specific router"""
-    routers.delete_one({ "_id": ObjectId(idx) })
-
+    routers.delete_one({"_id": ObjectId(idx)})
     return redirect("/")
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, threaded=False)

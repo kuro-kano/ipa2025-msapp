@@ -1,9 +1,12 @@
 """Worker that consumes jobs from RabbitMQ and processes them."""
-import os, time, pika
+import os
+import time
+import pika
 from callback import callback
 
 username = os.getenv('RABBITMQ_USERNAME')
 password = os.getenv('RABBITMQ_PASSWORD')
+
 
 def consume(host):
     """Consumes messages from the 'router_jobs' queue."""
@@ -24,13 +27,19 @@ def consume(host):
             print(f"Connection failed: {e}")
             time.sleep(5)
     else:
-        print("Could not connect after 10 attempts, exiting..."); exit(1)
+        print("Could not connect after 10 attempts, exiting...")
+        exit(1)
 
     channel = connection.channel()
     channel.queue_declare(queue="router_jobs")
     channel.basic_qos(prefetch_count=1)
-    channel.basic_consume(queue="router_jobs", on_message_callback=callback, auto_ack=True)
+    channel.basic_consume(
+        queue="router_jobs",
+        on_message_callback=callback,
+        auto_ack=True
+    )
     channel.start_consuming()
+
 
 if __name__ == "__main__":
     consume("localhost")

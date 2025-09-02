@@ -1,9 +1,11 @@
 """Simple scheduler that periodically sends Jobs to RabbitMQ."""
-import time, os, pika
+import time
+import os
 
 from bson import json_util
 from producer import produce
 from database import get_router_info
+
 
 def scheduler():
     """Periodically sends a message to RabbitMQ every 10 seconds."""
@@ -25,11 +27,12 @@ def scheduler():
                 body_bytes = json_util.dumps(data).encode("utf-8")
                 produce(rabbitmq_host, body_bytes)
         except Exception as e:
-            print(e); time.sleep(3)
+            print(e)
+            time.sleep(3)
         count += 1
         next_run += INTERVAL
         time.sleep(max(0.0, next_run - time.monotonic()))
 
+
 if __name__ == "__main__":
     scheduler()
-
