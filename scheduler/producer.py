@@ -5,7 +5,7 @@ import os
 
 def produce(host, body):
     """
-    Sends a message to the 'jobs' exchange with 
+    Sends a message to the 'jobs' exchange with
     the routing key 'check_interfaces'.
 
     Args:
