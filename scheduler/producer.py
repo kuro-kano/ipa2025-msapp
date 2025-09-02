@@ -1,14 +1,26 @@
 """Module to send messages to a RabbitMQ exchange for job scheduling."""
 import pika
+import os
 
 def produce(host, body):
     """
     Sends a message to the 'jobs' exchange with the routing key 'check_interfaces'.
+    
     Args:
         host (str): RabbitMQ server hostname or IP.
         body (str): Message body to send.
     """
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host))
+    credentials = pika.PlainCredentials(
+        os.getenv('RABBITMQ_USER', 'admin'),
+        os.getenv('RABBITMQ_PASS', 'rabbitmq')
+    )
+    
+    connection = pika.BlockingConnection(
+        pika.ConnectionParameters(
+            host=host,
+            credentials=credentials
+        )
+    )
     channel = connection.channel()
 
     channel.exchange_declare(exchange="jobs", exchange_type="direct")
