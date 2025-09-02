@@ -1,42 +1,4 @@
-/* Delete button styling */
-li button[type="submit"] {
-    background: linear-gradient(45deg, #ff4757, #ff3742);
-    padding: 10px 18px;
-    font-size: 12px;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
-    margin-top: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-}
-
-li button[type="submit"]::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-}
-
-li button[type="submit"]:hover {
-    background: linear-gradient(45deg, #ff3742, #ff2d3a);
-    transform: translateY(-2px);
-}
-
-li button[type="submit"]:hover::before {
-    left: 100%;
-}
-
-li button[type="submit"]:active {
-    transform: translateY(0);
-}/* Cool Dark Theme CSS - เท่ห์ ๆ Style */
+/* Cool Dark Theme CSS - Cyberpunk Edition */
 * {
     margin: 0;
     padding: 0;
@@ -51,11 +13,38 @@ body {
     line-height: 1.6;
 }
 
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    z-index: -1;
+    animation: starFloat 150s linear infinite;
+}
+
+@keyframes starFloat {
+    from { transform: translateY(0); }
+    to { transform: translateY(-1000px); }
+}
+
 .container {
     max-width: 600px;
     margin: 0 auto;
     padding: 30px 20px;
     animation: fadeInUp 0.8s ease-out;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes fadeInUp {
@@ -91,6 +80,21 @@ h1 {
     }
 }
 
+h1::after {
+    content: '';
+    display: block;
+    width: 150px;
+    height: 3px;
+    margin: 10px auto;
+    background: linear-gradient(90deg, transparent, #00d4ff, #ff00ff, transparent);
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
 form {
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -112,7 +116,7 @@ input[type="text"], input[name="ip"], input[name="username"], input[name="passwo
     padding: 12px 16px;
     margin: 8px 0;
     background: rgba(255, 255, 255, 0.1);
-    border: 2px solid transparent;
+    border: 1px solid rgba(0, 212, 255, 0.2);
     border-radius: 8px;
     color: #fff;
     font-size: 15px;
@@ -121,10 +125,15 @@ input[type="text"], input[name="ip"], input[name="username"], input[name="passwo
 }
 
 input[type="text"]:focus, input[name="ip"]:focus, input[name="username"]:focus, input[name="password"]:focus {
-    outline: none;
     border-color: #00d4ff;
-    box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), 
+                inset 0 0 15px rgba(0, 212, 255, 0.2);
+    animation: pulseBorder 2s infinite;
+}
+
+@keyframes pulseBorder {
+    0%, 100% { border-color: rgba(0, 212, 255, 0.4); }
+    50% { border-color: rgba(255, 0, 255, 0.4); }
 }
 
 input::placeholder {
@@ -176,6 +185,11 @@ li {
     position: relative;
     overflow: hidden;
     gap: 15px;
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(16, 16, 35, 0.7) 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes slideInLeft {
@@ -194,6 +208,13 @@ li:hover {
     border-color: rgba(0, 212, 255, 0.5);
     box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2), 0 0 20px rgba(255, 0, 255, 0.1);
     background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 255, 0.05));
+    border-image: linear-gradient(45deg, #00d4ff, #ff00ff) 1;
+    animation: borderGlow 2s infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(255, 0, 255, 0.3); }
 }
 
 li::before {
@@ -217,7 +238,9 @@ li::before {
 
 .comment-text strong {
     color: #00d4ff;
-    text-shadow: 0 0 8px rgba(0, 212, 255, 0.4);
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5),
+                 0 0 20px rgba(0, 212, 255, 0.3),
+                 0 0 30px rgba(0, 212, 255, 0.1);
     font-weight: 600;
     display: inline-block;
     padding: 2px 8px;
@@ -270,15 +293,18 @@ li form:hover {
     display: inline-block;
 }
 
-.status-btn::before {
+.status-btn::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #00d4ff, #ff00ff);
+    z-index: -1;
+    border-radius: 9px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .status-btn:hover {
@@ -288,8 +314,8 @@ li form:hover {
     border-color: rgba(168, 85, 247, 0.6);
 }
 
-.status-btn:hover::before {
-    left: 100%;
+.status-btn:hover::after {
+    opacity: 1;
 }
 
 .status-btn:active {
@@ -377,9 +403,36 @@ li button[type="submit"]:active {
 
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(45deg, #00d4ff, #ff00ff);
-    border-radius: 4px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(45deg, #00b8e6, #e600e6);
+}
+
+/* Loading animation */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent,
+        rgba(0, 212, 255, 0.2),
+        transparent
+    );
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }

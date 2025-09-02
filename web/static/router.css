@@ -1,4 +1,4 @@
-/* Router Detail CSS - เท่ห์ ๆ Theme */
+/* Router Detail CSS - Ultra Modern Theme */
 * {
     margin: 0;
     padding: 0;
@@ -12,12 +12,37 @@ body {
     color: #e0e0e0;
     line-height: 1.6;
     padding: 30px 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Add cosmic background effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    z-index: -1;
+    animation: starFloat 150s linear infinite;
+}
+
+@keyframes starFloat {
+    from { transform: translateY(0); }
+    to { transform: translateY(-1000px); }
 }
 
 h1 {
     text-align: center;
-    font-size: 2em;
-    margin-bottom: 40px;
+    font-size: 1.8em;
+    margin-bottom: 30px;
     background: linear-gradient(45deg, #00d4ff, #ff00ff, #ffff00);
     background-size: 300% 300%;
     -webkit-background-clip: text;
@@ -36,18 +61,40 @@ h1 {
     }
 }
 
+h1::after {
+    content: '';
+    display: block;
+    width: 150px;
+    height: 3px;
+    margin: 10px auto;
+    background: linear-gradient(90deg, transparent, #00d4ff, #ff00ff, transparent);
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
 /* Container for each timestamp group */
 .timestamp-group {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
     backdrop-filter: blur(15px);
     border: 1px solid rgba(0, 212, 255, 0.2);
-    border-radius: 15px;
+    border-radius: 20px;
     margin: 25px auto;
     max-width: 1000px;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(0, 212, 255, 0.2);
     animation: fadeInUp 0.6s ease-out;
-    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timestamp-group:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(0, 212, 255, 0.3);
 }
 
 @keyframes fadeInUp {
@@ -74,13 +121,20 @@ h1 {
 
 .timestamp-header {
     background: linear-gradient(90deg, rgba(0, 212, 255, 0.15), rgba(255, 0, 255, 0.05));
-    padding: 15px 20px;
+    padding: 20px 25px;
     border-bottom: 1px solid rgba(0, 212, 255, 0.2);
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
     color: #00d4ff;
     text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
-    margin-left: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.timestamp-header::before {
+    content: '⚡';
+    margin-right: 10px;
+    font-size: 20px;
 }
 
 table {
@@ -114,38 +168,61 @@ td {
     transition: all 0.3s ease;
 }
 
-tr:hover td {
-    background: rgba(0, 212, 255, 0.05);
-    color: #fff;
-    transform: scale(1.01);
+tr {
+    transition: all 0.3s ease;
+    position: relative;
 }
 
-/* Status indicators */
+tr:hover {
+    transform: scale(1.01);
+    z-index: 1;
+}
+
+tr:hover td {
+    background: rgba(0, 212, 255, 0.1);
+    color: #fff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
+
+/* Status indicators with glow effect */
 td:nth-child(4) {
     font-weight: 600;
+    position: relative;
+    padding-left: 25px;
 }
 
-td:nth-child(4):contains("up"),
-td:nth-child(4):contains("UP"),
-td:nth-child(4):contains("online"),
-td:nth-child(4):contains("ONLINE") {
-    color: #00ff88;
-    text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+td:nth-child(4)::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
 }
 
-td:nth-child(4):contains("down"),
-td:nth-child(4):contains("DOWN"),
-td:nth-child(4):contains("offline"),
-td:nth-child(4):contains("OFFLINE") {
-    color: #ff4757;
-    text-shadow: 0 0 8px rgba(255, 71, 87, 0.4);
+td:nth-child(4):contains("up")::before,
+td:nth-child(4):contains("UP")::before,
+td:nth-child(4):contains("online")::before,
+td:nth-child(4):contains("ONLINE")::before {
+    background: #00ff88;
+    box-shadow: 0 0 10px #00ff88;
 }
 
-/* Interface styling */
-td:nth-child(2) {
-    font-family: 'Courier New', monospace;
-    color: #ffa502;
-    font-weight: 600;
+td:nth-child(4):contains("down")::before,
+td:nth-child(4):contains("DOWN")::before,
+td:nth-child(4):contains("offline")::before,
+td:nth-child(4):contains("OFFLINE")::before {
+    background: #ff4757;
+    box-shadow: 0 0 10px #ff4757;
+}
+
+@keyframes pulse {
+    0% { transform: translateY(-50%) scale(1); opacity: 1; }
+    50% { transform: translateY(-50%) scale(1.2); opacity: 0.8; }
+    100% { transform: translateY(-50%) scale(1); opacity: 1; }
 }
 
 /* IP Address styling */
@@ -154,50 +231,53 @@ td:nth-child(3) {
     color: #70a1ff;
 }
 
-/* Protocol styling */
+/* Protocol badge styling */
 td:nth-child(5) {
     font-weight: 600;
     color: #ff6b9d;
     text-transform: uppercase;
+    background: rgba(255, 107, 157, 0.1);
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-align: center;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-    .timestamp-group {
-        margin: 15px 10px;
-    }
-    
-    h1 {
-        font-size: 1.6em;
-        margin-bottom: 30px;
-    }
-    
-    th, td {
-        padding: 10px 8px;
-        font-size: 12px;
-    }
-    
-    .timestamp-header {
-        padding: 12px 15px;
-        font-size: 14px;
-    }
+/* Cool loading animation */
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
 }
 
-/* Cool scrollbar */
+.loading {
+    background: linear-gradient(90deg, 
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* Enhanced scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(45deg, #00d4ff, #ff00ff);
-    border-radius: 4px;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(45deg, #00b8e6, #e600e6);
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
