@@ -52,6 +52,23 @@ services:
       MONGO_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/
       DB_NAME: ${DB_NAME}
 
+  worker:
+    build: ./worker
+    depends_on:
+      - rabbitmq
+      - mongo
+      - scheduler
+    networks:
+      - app-net
+    env_file:
+      - .env
+    environment:
+      RABBITMQ_HOST: ${RABBITMQ_HOST}
+      RABBITMQ_USERNAME: ${RABBITMQ_DEFAULT_USERNAME}
+      RABBITMQ_PASSWORD: ${RABBITMQ_DEFAULT_PASSWORD}
+      MONGO_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/
+      DB_NAME: ${DB_NAME}
+
 volumes:
   mongo-data:
 
