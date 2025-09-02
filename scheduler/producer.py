@@ -30,7 +30,7 @@ def produce(host, body):
     channel.basic_publish(
         exchange="jobs",
         routing_key="check_interfaces",
-        body=body
+        body=body,
     )
 
     connection.close()

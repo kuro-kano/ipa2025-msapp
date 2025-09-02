@@ -3,7 +3,7 @@
 from os import environ as env
 
 from bson import ObjectId
-from flask import Flask, request, render_template, redirect
+from flask import Flask, redirect, render_template, request
 from pymongo import MongoClient
 
 
@@ -24,15 +24,12 @@ def main():
 @app.route("/router/<ip>", methods=["GET"])
 def router_detail(ip):
     """View router interfaces status."""
-    data = (
-        db.interface_status.find({"router_ip": ip})
-        .sort("timestamp", -1)
-        .limit(3)
-    )
+    query = {"router_ip": ip}
+    data = db.interface_status.find(query).sort("timestamp", -1).limit(3)
     return render_template(
         "router.html",
         router_ip=ip,
-        interface_data=data
+        interface_data=data,
     )
 
 
@@ -44,11 +41,12 @@ def add_router():
     password = request.form.get("password")
 
     if ip and username and password:
-        routers.insert_one({
+        router = {
             "ip": ip,
             "username": username,
-            "password": password
-        })
+            "password": password,
+        }
+        routers.insert_one(router)
     return redirect("/")
 
 

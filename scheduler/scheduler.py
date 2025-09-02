@@ -14,7 +14,7 @@ def scheduler():
     next_run = time.monotonic()
     count = 0
 
-    rabbitmq_host = os.getenv('RABBITMQ_HOST')
+    rabbitmq_host = os.getenv("RABBITMQ_HOST")
 
     while True:
         now = time.time()
