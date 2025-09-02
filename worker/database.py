@@ -1,4 +1,5 @@
 """Module to handle database operations for storing interface status."""
+
 import os
 
 from datetime import datetime, UTC

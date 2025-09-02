@@ -1,4 +1,5 @@
 """Simple scheduler that periodically sends Jobs to RabbitMQ."""
+
 import os
 import time
 

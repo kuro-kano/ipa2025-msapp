@@ -1,4 +1,5 @@
 """File app.py to run web server."""
+
 from os import environ as env
 
 from bson import ObjectId

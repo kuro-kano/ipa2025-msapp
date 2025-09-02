@@ -1,4 +1,5 @@
 """Worker that consumes jobs from RabbitMQ and processes them."""
+
 import os
 import pika
 import time

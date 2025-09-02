@@ -1,4 +1,5 @@
 """Client to connect to routers and fetch interface information."""
+
 import ntc_templates
 import os
 

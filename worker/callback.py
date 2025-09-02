@@ -1,4 +1,5 @@
 """Worker that consumes jobs from RabbitMQ and processes them."""
+
 from bson import json_util
 from router_client import get_interfaces
 
