@@ -5,16 +5,12 @@ import os
 def produce(host, body):
     """
     Sends a message to the 'jobs' exchange with the routing key 'check_interfaces'.
-    
     Args:
         host (str): RabbitMQ server hostname or IP.
         body (str): Message body to send.
     """
-    credentials = pika.PlainCredentials(
-        os.getenv('RABBITMQ_USER', 'admin'),
-        os.getenv('RABBITMQ_PASS', 'rabbitmq')
-    )
-    
+    credentials = pika.PlainCredentials(os.getenv('RABBITMQ_USERNAME'), os.getenv('RABBITMQ_PASSWORD'))
+
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(
             host=host,
