@@ -7,7 +7,7 @@ from database import get_router_info
 
 def scheduler():
     """Periodically sends a message to RabbitMQ every 10 seconds."""
-    INTERVAL = 10.0
+    INTERVAL = 60.0
     next_run = time.monotonic()
     count = 0
 
