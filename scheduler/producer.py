@@ -9,7 +9,9 @@ def produce(host, body):
         host (str): RabbitMQ server hostname or IP.
         body (str): Message body to send.
     """
-    credentials = pika.PlainCredentials(os.getenv('RABBITMQ_USERNAME'), os.getenv('RABBITMQ_PASSWORD'))
+    credentials = pika.PlainCredentials(
+        os.getenv('RABBITMQ_USERNAME'),
+        os.getenv('RABBITMQ_PASSWORD'))
 
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(
