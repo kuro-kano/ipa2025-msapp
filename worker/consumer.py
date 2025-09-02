@@ -1,19 +1,15 @@
 """Worker that consumes jobs from RabbitMQ and processes them."""
 import os, time, pika
+from callback import callback
 
 username = os.getenv('RABBITMQ_USERNAME')
 password = os.getenv('RABBITMQ_PASSWORD')
-
-def callback(ch, method, props, body):
-    """Callback function to process received messages from RabbitMQ."""
-    print(f"body: {body.decode()}")
-    time.sleep(3)
 
 def consume(host):
     """Consumes messages from the 'router_jobs' queue."""
     for attempt in range(10):
         try:
-            print(f"Connecting tot RabbitMQ (try {attempt})...")
+            print(f"Connecting to RabbitMQ (try {attempt})...")
 
             credentials = pika.PlainCredentials(username, password)
             connection = pika.BlockingConnection(
