@@ -9,12 +9,19 @@ app = Flask(__name__)
 client = MongoClient(env.get("MONGO_URI"))
 db = client[env.get("DB_NAME")]
 routers = db["routers"]
+interface_status = db["interface_status"]
 
 @app.route("/")
 def main():
     """main function what render index.html"""
     data = list(routers.find())
     return render_template("index.html", routers=data)
+
+@app.route("/router/<ip>", methods=["GET"])
+def router_detail(ip):
+    """view router interfaces status"""
+    data = db.interface_status.find({"router_ip": ip}).sort("timestamp", -1).limit(3)
+    return render_template("router.html", router_ip=ip, interface_data=data)
 
 @app.route("/add", methods=["POST"])
 def add_router():

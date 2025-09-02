@@ -1,0 +1,202 @@
+/* Router Detail CSS - เท่ห์ ๆ Theme */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+    color: #e0e0e0;
+    line-height: 1.6;
+    padding: 30px 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 40px;
+    background: linear-gradient(45deg, #00d4ff, #ff00ff, #ffff00);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Container for each timestamp group */
+.timestamp-group {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 15px;
+    margin: 25px auto;
+    max-width: 1000px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    animation: fadeInUp 0.6s ease-out;
+    position: relative;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.timestamp-group::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(45deg, #00d4ff, #ff00ff);
+    opacity: 0.8;
+}
+
+.timestamp-header {
+    background: linear-gradient(90deg, rgba(0, 212, 255, 0.15), rgba(255, 0, 255, 0.05));
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+    font-weight: 600;
+    font-size: 16px;
+    color: #00d4ff;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+    margin-left: 4px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    background: transparent;
+}
+
+th {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(255, 0, 255, 0.1));
+    color: #fff;
+    padding: 15px 12px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border: none;
+    position: sticky;
+    top: 0;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+td {
+    padding: 12px;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+tr:hover td {
+    background: rgba(0, 212, 255, 0.05);
+    color: #fff;
+    transform: scale(1.01);
+}
+
+/* Status indicators */
+td:nth-child(4) {
+    font-weight: 600;
+}
+
+td:nth-child(4):contains("up"),
+td:nth-child(4):contains("UP"),
+td:nth-child(4):contains("online"),
+td:nth-child(4):contains("ONLINE") {
+    color: #00ff88;
+    text-shadow: 0 0 8px rgba(0, 255, 136, 0.4);
+}
+
+td:nth-child(4):contains("down"),
+td:nth-child(4):contains("DOWN"),
+td:nth-child(4):contains("offline"),
+td:nth-child(4):contains("OFFLINE") {
+    color: #ff4757;
+    text-shadow: 0 0 8px rgba(255, 71, 87, 0.4);
+}
+
+/* Interface styling */
+td:nth-child(2) {
+    font-family: 'Courier New', monospace;
+    color: #ffa502;
+    font-weight: 600;
+}
+
+/* IP Address styling */
+td:nth-child(3) {
+    font-family: 'Courier New', monospace;
+    color: #70a1ff;
+}
+
+/* Protocol styling */
+td:nth-child(5) {
+    font-weight: 600;
+    color: #ff6b9d;
+    text-transform: uppercase;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .timestamp-group {
+        margin: 15px 10px;
+    }
+    
+    h1 {
+        font-size: 1.6em;
+        margin-bottom: 30px;
+    }
+    
+    th, td {
+        padding: 10px 8px;
+        font-size: 12px;
+    }
+    
+    .timestamp-header {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+}
+
+/* Cool scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #00d4ff, #ff00ff);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #00b8e6, #e600e6);
+}
