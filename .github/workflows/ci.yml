@@ -21,10 +21,10 @@ jobs:
 
     - name: Install Lint & Format Tools
       run: |
-        pip install flask8 black
+        pip install flake8 black
 
     - name: Run flake8 (Lint)
-      run: flask8 .
+      run: flake8 .
 
     - name: Check code format with black
       run: black --check .
@@ -42,10 +42,10 @@ jobs:
 
     - name: Build & Push Docker Images
       run: |
-        docker build -t kurokano/worker:lastest ./worker
-        docker build -t kurokano/scheduler:lastest ./scheduler
-        docker build -t kurokano/web:lastest ./web
+        docker build -t chotipatp/worker:latest ./worker
+        docker build -t chotipatp/scheduler:latest ./scheduler
+        docker build -t chotipatp/web:latest ./web
 
-        docker push kurokano/worker:lastest
-        docker push kurokano/scheduler:lastest
-        docker push kurokano/web:lastest
+        docker push chotipatp/worker:latest
+        docker push chotipatp/scheduler:latest
+        docker push chotipatp/web:latest
