@@ -1,21 +1,27 @@
-"""Simple scheduler that periodically sends messages to RabbitMQ."""
+"""Simple scheduler that periodically sends Jobs to RabbitMQ."""
 import time, pika 
 from producer import produce
 
 def scheduler():
     """Periodically sends a message to RabbitMQ every 10 seconds."""
+    INTERVAL = 10.0
+    next_run = time.monotonic()
     count = 0
+
     while True:
         now = time.time()
         now_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now))
-        print(f"[{now_str}] run #{count}")
+        ms = int((now % 1) * 1000)
+        now_str_with_ms = f"{now_str}.{ms:03d}"
+        print(f"[{now_str_with_ms}] run #{count}")
 
         try:
             produce("localhost", "192.168.1.44")
         except Exception as e:
             print(e); time.sleeps(3)
         count += 1
-        time.sleep(10)
+        next_run += INTERVAL
+        time.sleep(max(0.0, next_run - time.monotonic()))
 
 if __name__ == "__main__":
     scheduler()
