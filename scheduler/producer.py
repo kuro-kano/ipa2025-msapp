@@ -1,6 +1,6 @@
 """Module to send messages to a RabbitMQ exchange for job scheduling."""
-import pika
 import os
+import pika
 
 
 def produce(host, body):

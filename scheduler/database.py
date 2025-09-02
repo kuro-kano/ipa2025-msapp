@@ -1,5 +1,6 @@
 """Pull data from the mongoDB Database."""
 import os
+
 from pymongo import MongoClient
 
 

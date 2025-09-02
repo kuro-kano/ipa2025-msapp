@@ -1,7 +1,8 @@
 """Module to handle database operations for storing interface status."""
-from pymongo import MongoClient
-from datetime import datetime, UTC
 import os
+
+from datetime import datetime, UTC
+from pymongo import MongoClient
 
 
 def save_interface_status(router_ip, interfaces):

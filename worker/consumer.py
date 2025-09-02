@@ -1,7 +1,8 @@
 """Worker that consumes jobs from RabbitMQ and processes them."""
 import os
-import time
 import pika
+import time
+
 from callback import callback
 
 username = os.getenv('RABBITMQ_USERNAME')

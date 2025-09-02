@@ -1,10 +1,10 @@
 """Simple scheduler that periodically sends Jobs to RabbitMQ."""
-import time
 import os
+import time
 
 from bson import json_util
-from producer import produce
 from database import get_router_info
+from producer import produce
 
 
 def scheduler():

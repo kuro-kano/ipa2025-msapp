@@ -1,9 +1,9 @@
-"""file app.py to run web server"""
+"""File app.py to run web server."""
 from os import environ as env
 
+from bson import ObjectId
 from flask import Flask, request, render_template, redirect
 from pymongo import MongoClient
-from bson import ObjectId
 
 
 app = Flask(__name__)
@@ -15,17 +15,19 @@ interface_status = db["interface_status"]
 
 @app.route("/")
 def main():
-    """main function what render index.html"""
+    """Main function that renders index.html."""
     data = list(routers.find())
     return render_template("index.html", routers=data)
 
 
 @app.route("/router/<ip>", methods=["GET"])
 def router_detail(ip):
-    """view router interfaces status"""
-    data = (db.interface_status.find({"router_ip": ip})
-            .sort("timestamp", -1)
-            .limit(3))
+    """View router interfaces status."""
+    data = (
+        db.interface_status.find({"router_ip": ip})
+        .sort("timestamp", -1)
+        .limit(3)
+    )
     return render_template(
         "router.html",
         router_ip=ip,
@@ -35,7 +37,7 @@ def router_detail(ip):
 
 @app.route("/add", methods=["POST"])
 def add_router():
-    """add router to data[]"""
+    """Add router to database."""
     ip = request.form.get("ip")
     username = request.form.get("username")
     password = request.form.get("password")
@@ -51,7 +53,7 @@ def add_router():
 
 @app.route("/delete/<idx>", methods=["POST"])
 def delete_router(idx):
-    """delete function to delete specific router"""
+    """Delete specific router from database."""
     routers.delete_one({"_id": ObjectId(idx)})
     return redirect("/")
 

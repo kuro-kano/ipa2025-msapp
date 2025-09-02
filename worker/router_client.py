@@ -1,7 +1,8 @@
 """Client to connect to routers and fetch interface information."""
-from netmiko import ConnectHandler
 import ntc_templates
 import os
+
+from netmiko import ConnectHandler
 from database import save_interface_status
 
 
@@ -23,7 +24,6 @@ def get_interfaces(ip, username, password):
         result = conn.send_command("show ip interface brief", use_textfsm=True)
         conn.disconnect()
 
-    # print(json.dumps(result, indent=2))
     save_interface_status(ip, result)
 
 
