@@ -91,8 +91,8 @@ table {
 }
 
 th {
-    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(255, 0, 255, 0.1));
-    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
     padding: 15px 12px;
     text-align: left;
     font-weight: 600;
@@ -100,9 +100,10 @@ th {
     text-transform: uppercase;
     letter-spacing: 1px;
     border: none;
+    border-bottom: 2px solid rgba(0, 212, 255, 0.3);
     position: sticky;
     top: 0;
-    text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+    text-shadow: none;
 }
 
 td {
