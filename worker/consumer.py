@@ -1,4 +1,4 @@
-""""""
+"""Worker that consumes jobs from RabbitMQ and processes them."""
 import os, time, pika
 
 username = os.getenv('RABBITMQ_USERNAME')
@@ -10,7 +10,7 @@ def callback(ch, method, props, body):
     time.sleep(3)
 
 def consume(host):
-    """"""
+    """Consumes messages from the 'router_jobs' queue."""
     for attempt in range(10):
         try:
             print(f"Connecting tot RabbitMQ (try {attempt})...")
