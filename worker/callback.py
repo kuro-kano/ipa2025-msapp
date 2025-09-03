@@ -6,6 +6,7 @@ from router_client import get_interfaces
 
 def callback(ch, method, props, body):
     """Callback function to process received messages from RabbitMQ."""
+    output = None
     job = json_util.loads(body.decode())
     router_ip = job["ip"]
     router_username = job["username"]
