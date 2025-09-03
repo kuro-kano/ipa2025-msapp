@@ -25,7 +25,7 @@ def main():
 def router_detail(ip):
     """View router interfaces status."""
     query = {"router_ip": ip}
-    data = db.interface_status.find(query).sort("timestamp", -1).limit(3)
+    data = db.interface_status.find(query).sort("timestamp", -1).limit(5)
     return render_template(
         "router.html",
         router_ip=ip,
