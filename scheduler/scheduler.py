@@ -10,7 +10,7 @@ from producer import produce
 
 def scheduler():
     """Periodically sends a message to RabbitMQ every 10 seconds."""
-    INTERVAL = 60.0
+    INTERVAL = 30.0
     next_run = time.monotonic()
     count = 0
 
